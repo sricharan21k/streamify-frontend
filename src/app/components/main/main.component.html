@@ -1,0 +1,62 @@
+<div class="main-container">
+  @if (showHeader) {
+  <div class="title-bar">
+    <div class="title-wrapper">
+      <div class="title">{{ currentTopic | pascalcase }}</div>
+      @if (showBackButton) {
+      <svg
+        (click)="navigateBack()"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="nav-btn"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+        />
+      </svg>
+      }
+    </div>
+    <div class="search-bar">
+      <input
+        (input)="filter()"
+        [formControl]="searchControl"
+        class="search-input"
+        type="text"
+        placeholder="Search movies, shows, music and more..."
+      />
+
+      <div class="search-results">
+        @if (searchHistory.length || searchResults.length) { @if
+        (searchHistory.length) {
+        <span class="history-header">History</span>
+        } @for (item of searchResults.length?searchResults:searchHistory; track
+        $index) {
+        <div class="result-container">
+          <div class="result-content" (mousedown)="viewDetails(item)">
+            <img [src]="item.image" alt="" />
+            <div>{{ item.title }}</div>
+            <div class="result-info">
+              {{ item.type | pascalcase }}
+            </div>
+          </div>
+          <div class="delete-history-item" (click)="deleteSearch(item)">
+            Delete
+          </div>
+        </div>
+        } }@else {
+        <span class="history-header">No history</span>
+        }
+      </div>
+    </div>
+    <div class="brand">Streamify</div>
+  </div>
+  }
+  <div class="main-content" [@routeTransition]="route.snapshot.data">
+    <router-outlet></router-outlet>
+  </div>
+</div>

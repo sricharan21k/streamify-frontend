@@ -1,0 +1,149 @@
+<!-- Selected show -->
+@if (selectedShow) {
+<div class="container">
+  <div class="wrapper">
+    <div
+      class="background"
+      [ngStyle]="{
+        'background-image': 'url(' + selectedShow.poster + ')'
+      }"
+    ></div>
+    <div class="show-details">
+      <div class="cast-container">
+        <div class="cast-header">Cast</div>
+        <div>
+          @for (cast of selectedShow.starring.split(','); track $index) {
+          <div>{{ cast }}</div>
+          }
+        </div>
+      </div>
+
+      <div class="add-info-container">
+        <div class="add-info-header">Additional Info</div>
+        <div class="add-info">
+          <div class="add-info-segment">Creator</div>
+          <div>{{ selectedShow.creator }}</div>
+        </div>
+        <div class="add-info">
+          <div class="add-info-segment">Composer</div>
+          <div>{{ selectedShow.composer }}</div>
+        </div>
+        <div class="add-info">
+          <div class="add-info-segment">Language</div>
+          <div>{{ selectedShow.language }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="show-info-container">
+    <div class="show-info">
+      <div style="font-size: 3rem">{{ selectedShow.title }}</div>
+      <div class="" style="font-size: 1rem">
+        {{ selectedShow.description }}
+      </div>
+      <div style="color: rgba(255, 255, 255, 0.7)">
+        {{ selectedShow.initialRelease }} IMDb {{ selectedShow.rating }}
+      </div>
+      <div class="genre-container">
+        <div class="genre" routerLink="/shows/genre/{{ selectedShow.genre }}">
+          {{ selectedShow.genre }}
+        </div>
+        @for (genre of selectedShow.otherGenres.split(','); track $index) {
+        <div class="genre-seperator"></div>
+        <div class="genre" routerLink="/shows/genre/{{ genre }}">
+          {{ genre | pascalcase }}
+        </div>
+        }
+      </div>
+      <div class="play-controls-container">
+        <div
+          class="play-control watch-now-button"
+          (click)="watchNow(selectedShow.id)"
+        >
+          Watch now
+        </div>
+        <div
+          class="play-control watchlist-button"
+          (click)="addToWatchlist(selectedShow.id)"
+        >
+          Add to watchlist
+        </div>
+      </div>
+    </div>
+    <div class="episode-list-wrapper">
+      <div class="episode-list-title">Episodes</div>
+      <div class="episode-list">
+        @for (episode of episodeList; track $index) {
+        <div class="episode">
+          <div>{{ $index + 1 }}</div>
+          <div>
+            <div class="episode-title">
+              <div style="font-size: 1.25rem">
+                S{{ episode.season }} E{{ episode.episode }} {{ episode.title }}
+              </div>
+              <div>{{ episode.releaseDate | date }}</div>
+            </div>
+            <div class="episode-description">{{ episode.description }}</div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- List of shows -->
+@if (shows.length) {
+<div class="show-container">
+  <div class="header">{{ header | pascalcase }}</div>
+  <div class="show-wrapper">
+    @for (show of shows ; track $index) {
+    <div class="show">
+      <img
+        class="show-poster"
+        [src]="show.poster"
+        alt=""
+        routerLink="/show/{{ show.id }}"
+      />
+      <div class="show-details-mini">
+        <div class="show-header">
+          <div class="show-title">{{ show.title }}</div>
+          <div class="show-info-mini">
+            {{ show.initialRelease }} | {{ show.rating }} IMDb
+          </div>
+          <div class="genre-container">
+            <div class="genre" routerLink="/shows/genre/{{ show.genre }}">
+              {{ show.genre }}
+            </div>
+            @if(show.otherGenres){ @for (item of show.otherGenres.split(',');
+            track $index) {
+            <div class="genre-seperator"></div>
+            <div class="genre" routerLink="/shows/genre/{{ item }}">
+              {{ item }}
+            </div>
+            } }
+          </div>
+          <div class="movie-description">{{ show.description }}</div>
+        </div>
+
+        <div class="play-controls-container-mini">
+          <div
+            class="play-control play-control-mini watch-now-button"
+            (click)="watchNow(show.id)"
+          >
+            Watch now
+          </div>
+          <div
+            class="play-control play-control-mini watchlist-button"
+            (click)="addToWatchlist(show.id)"
+          >
+            Watchlist
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+}

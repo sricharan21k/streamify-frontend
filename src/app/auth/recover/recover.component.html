@@ -1,0 +1,153 @@
+<div class="container">
+  <div class="title">Streamify</div>
+  <div class="wrapper">
+    <div class="header">Forgot password?</div>
+    <div class="links-container">
+      <div class="">Remember password?</div>
+      <div class="link-text" routerLink="/login">Sign in here!</div>
+    </div>
+    @if (!showOTPInput) {
+    <form [formGroup]="recoveryForm" (ngSubmit)="sendOtp()">
+      <div class="input-container">
+        <input
+          type="email"
+          id="email"
+          placeholder=" "
+          formControlName="email"
+        />
+        <label for="email">Email</label>
+      </div>
+      <button class="submit-button" type="submit">Submit</button>
+    </form>
+    } @if (showOTPInput) {
+    <div class="otp-form-wrapper">
+      <div class="my-4">OTP sent successfully!</div>
+      <form class="otp-form" [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
+        <div class="otp-input-wrapper" data-hs-pin-input>
+          <input
+            #otp1
+            (keyup)="onOtpInput($event, otp2, undefined)"
+            formControlName="num1"
+            type="text"
+            placeholder="⚬"
+            maxlength="1"
+            data-hs-pin-input-item
+          />
+          <input
+            #otp2
+            (keyup)="onOtpInput($event, otp3, otp1)"
+            formControlName="num2"
+            type="text"
+            placeholder="⚬"
+            maxlength="1"
+            data-hs-pin-input-item
+          />
+          <input
+            #otp3
+            (keyup)="onOtpInput($event, otp4, otp2)"
+            formControlName="num3"
+            type="text"
+            placeholder="⚬"
+            maxlength="1"
+            data-hs-pin-input-item
+          />
+          <input
+            #otp4
+            (keyup)="onOtpInput($event, otp5, otp3)"
+            formControlName="num4"
+            type="text"
+            placeholder="⚬"
+            maxlength="1"
+            data-hs-pin-input-item
+          />
+          <input
+            #otp5
+            (keyup)="onOtpInput($event, otp6, otp4)"
+            formControlName="num5"
+            type="text"
+            placeholder="⚬"
+            maxlength="1"
+            data-hs-pin-input-item
+          />
+          <input
+            #otp6
+            (keyup)="onOtpInput($event, undefined, otp5)"
+            formControlName="num6"
+            type="text"
+            placeholder="⚬"
+            maxlength="1"
+            data-hs-pin-input-item
+          />
+        </div>
+        <input type="submit" name="Verify" id="" value="Verify" />
+      </form>
+      <div>{{ displayTime }}</div>
+    </div>
+    } @if(otpVerified){
+    <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+      <!-- Password -->
+      <div>
+        <div class="input-container">
+          <input
+            type="password"
+            id="password"
+            placeholder=" "
+            formControlName="password"
+          />
+          <label for="password">Password</label>
+        </div>
+
+        <!-- Confirm password-->
+        <div class="input-container">
+          <input
+            type="password"
+            id="confirm-password"
+            placeholder=" "
+            formControlName="confirmPassword"
+          />
+          <label for="confirmPassword">Confirm password</label>
+        </div>
+      </div>
+
+      <div class="warning">
+        <small
+          *ngIf="
+            passwordForm.get('password')?.dirty &&
+            passwordForm.get('password')?.hasError('minlength')
+          "
+        >
+          Password must be at least 8 characters long.
+        </small>
+        <small *ngIf="passwordForm.get('password')?.errors?.['numberRequired']"
+          >Password must contain at least one number.</small
+        >
+        <small
+          *ngIf="passwordForm.get('password')?.errors?.['uppercaseRequired']"
+          >Password must contain at least one uppercase letter.</small
+        >
+        <small
+          *ngIf="passwordForm.get('password')?.errors?.['lowercaseRequired']"
+          >Password must contain at least one lowercase letter.</small
+        >
+        <small
+          *ngIf="passwordForm.get('password')?.errors?.['specialCharRequired']"
+          >Password must contain at least one special character.</small
+        >
+        <small *ngIf="passwordForm.get('password')?.errors?.['noSpacesAllowed']"
+          >Password must not contain spaces.</small
+        >
+        <small
+          *ngIf="
+            passwordForm.get('confirmPassword')?.dirty &&
+            passwordForm.get('confirmPassword')?.hasError('mismatch')
+          "
+        >
+          Password not matching.
+        </small>
+      </div>
+
+      <button class="submit-button" type="submit">Sign up</button>
+    </form>
+    }
+  </div>
+</div>

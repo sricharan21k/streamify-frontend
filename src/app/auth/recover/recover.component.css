@@ -1,0 +1,154 @@
+.container {
+  text-align: center;
+}
+
+.title {
+  color: #fa2a55;
+  font-size: 2.5rem;
+  margin: 1rem;
+}
+
+.header {
+  font-size: 2rem;
+  margin: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.wrapper {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 30vw;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.input-container {
+  position: relative;
+  padding: 1rem;
+}
+
+.input-container input {
+  width: 96%;
+  padding: 16px 0px 8px 10px;
+  font-size: 1.25rem;
+  color: white; /* gray-900 */
+  background-color: transparent;
+  border: 2px solid #d1d5db; /* gray-300 */
+  border-radius: 0.5rem;
+  appearance: none;
+  outline: none;
+}
+
+.input-container input:focus {
+  border-color: #fa2a55;
+  box-shadow: none;
+}
+
+.input-container label {
+  position: absolute;
+  font-size: 0.875rem;
+  color: white;
+  transition: all 0.2s ease;
+  transform-origin: 0;
+  padding: 0 4px;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+  color: rgba(255, 255, 255, 0.75);
+  top: 10px;
+  transform: scale(0.75) translateY(75%);
+}
+
+.links-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.link-text {
+  color: #fa2a55;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.link-text:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.submit-button {
+  width: 91.5%;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0.75rem;
+  margin: 1rem;
+  margin-top: 0;
+  cursor: pointer;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s;
+}
+
+.submit-button:hover {
+  color: #fa2a55;
+  background-color: white;
+}
+
+.otp-form-wrapper {
+  margin: 2rem;
+}
+
+.otp-form {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem;
+}
+
+.otp-form > input {
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  width: 4rem;
+  color: black;
+  background-color: white;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.otp-form > input:hover {
+  scale: 95%;
+}
+
+.otp-form > input:active {
+  scale: 100%;
+}
+
+.otp-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.otp-input-wrapper > input {
+  height: 2rem;
+  width: 2rem;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.2);
+}

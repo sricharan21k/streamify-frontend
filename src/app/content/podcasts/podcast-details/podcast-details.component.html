@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="header">{{ header | pascalcase }}</div>
+  <div class="wrapper">
+    @for (podcast of podcastList; track $index) {
+    <div class="podcast">
+      <img class="podcast-thumbnail" [src]="podcast.thumbnail" alt="" />
+      <div class="podcast-title">{{ podcast.title }}</div>
+      <div class="add-queue-button" (click)="addToQueue(podcast.id)">
+        Add to queue
+      </div>
+    </div>
+    }@for (podcast of podcastList; track $index) {
+    <div class="podcast">
+      <img class="podcast-thumbnail" [src]="podcast.thumbnail" alt="" />
+      <div class="podcast-title">{{ podcast.title }}</div>
+      <div class="add-queue-button" (click)="addToQueue(podcast.id)">
+        Add to queue
+      </div>
+    </div>
+    }
+  </div>
+</div>

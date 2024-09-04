@@ -1,0 +1,119 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.warning {
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.header {
+  color: #fa2a55;
+  font-size: 3rem;
+}
+
+.wrapper {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.wrapper > div {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+}
+
+.input-container {
+  position: relative;
+  padding: 1rem;
+}
+
+.input-container input {
+  padding: 16px 0 8px 10px;
+  font-size: 1.25rem;
+  color: white; /* gray-900 */
+  background-color: transparent;
+  border: 2px solid #d1d5db; /* gray-300 */
+  border-radius: 0.5rem;
+  appearance: none;
+  outline: none;
+}
+
+.long-input-container {
+  width: 92.75%;
+}
+
+.long-input {
+  width: 100%;
+}
+
+.input-container input:focus {
+  border-color: #fa2a55;
+  box-shadow: none;
+}
+
+.input-container label {
+  position: absolute;
+  font-size: 0.875rem;
+  color: white;
+  transition: all 0.2s ease;
+  transform-origin: 0;
+  padding: 0 4px;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+  color: rgba(255, 255, 255, 0.75);
+  top: 10px;
+  transform: scale(0.75) translateY(75%);
+}
+
+.links-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 1rem;
+}
+
+.link-text {
+  color: #fa2a55;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.link-text:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.submit-button {
+  width: 95%;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0.75rem;
+  margin: 1rem;
+  cursor: pointer;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s;
+}
+
+.submit-button:hover {
+  color: #fa2a55;
+  background-color: white;
+}

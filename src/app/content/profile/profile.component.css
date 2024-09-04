@@ -1,0 +1,293 @@
+/* profile */
+
+.profile {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.profile-image-wrapper {
+  width: 12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.profile-image {
+  height: 12rem;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.profile-image-alt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12rem;
+  font-size: 5rem;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Hide the default file input */
+#file-upload {
+  display: none;
+}
+
+/* Style the label as a button */
+.custom-file-label {
+  width: 100%;
+  display: inline-block;
+  padding: 0.75rem 0;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+/* Add hover effect */
+.custom-file-label:hover {
+  color: black;
+  background-color: white;
+}
+
+.details {
+  margin: 0 5rem;
+}
+
+.user-name {
+  font-size: 4rem;
+}
+
+.user-id {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.change-password {
+  margin: 0.75rem 0.2rem;
+  text-decoration: underline;
+  color: #fa2a55;
+  cursor: pointer;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  margin-left: auto;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s;
+}
+
+.logout:hover {
+  cursor: pointer;
+  color: black;
+  background-color: white;
+}
+
+.logout-btn {
+  width: 2rem;
+}
+
+/* >>>>>>>>> content <<<<<<<<<<<< */
+
+.container {
+  margin-bottom: 2rem;
+}
+
+.header {
+  display: inline-block;
+  font-size: 1.5em;
+  padding: 5px 0;
+  margin-bottom: 1em;
+  transition: all 0.3s;
+}
+
+.header > span {
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.header:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.header:hover > span {
+  opacity: 1;
+}
+
+.wrapper {
+  display: flex;
+  gap: 1.5rem;
+  overflow: scroll;
+  border-radius: 5px;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.empty-list {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 3rem;
+  padding: 3rem;
+  width: 18rem;
+  text-align: center;
+}
+
+/* Item */
+
+.list-item {
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.rectangle-thumbnail {
+  height: 12rem;
+  width: 10rem;
+  object-fit: cover;
+  object-position: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  transition: all 0.3s;
+}
+
+.square-thumbnail {
+  max-width: 10rem;
+  height: 10rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  transition: all 0.3s;
+}
+
+.list-item-title {
+  padding: 0.5rem;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.item-wrapper {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s;
+}
+
+.item-wrapper:hover {
+  cursor: pointer;
+  scale: 95%;
+}
+
+.item-title-text {
+  transition: all 0.3s;
+}
+
+.text-animate {
+  animation: scrollText 5s linear infinite;
+}
+
+/* Remove button */
+
+.queue-remove-button {
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.queue-remove-button:hover {
+  scale: 95%;
+  color: black;
+  background-color: white;
+  cursor: pointer;
+}
+
+.queue-remove-button:active {
+  scale: 100%;
+}
+
+/* Scroll */
+
+.outer-wrapper {
+  position: relative;
+}
+
+.scroll-btn {
+  height: 50%;
+  width: 2rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  font-size: 2rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+  color: black;
+  background-color: white;
+}
+
+.scroll-btn:hover {
+  scale: 95%;
+}
+
+.scroll-btn:active {
+  scale: 100%;
+}
+
+.scroll-btn > svg {
+  width: 2rem;
+}
+
+.left-btn {
+  left: 0;
+}
+
+.right-btn {
+  right: 0;
+}
+
+.rectangle-scroll-btn {
+  top: 0;
+  transform: translateY(25%);
+}
+
+.square-scroll-btn {
+  top: 0;
+  transform: translateY(20%);
+}
+
+/* Animations */
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

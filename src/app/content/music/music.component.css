@@ -1,0 +1,239 @@
+.container {
+  margin-bottom: 3rem;
+}
+
+.header {
+  display: inline-block;
+  font-size: 1.5em;
+  padding: 5px 0;
+  margin-bottom: 1em;
+  transition: all 0.3s;
+}
+
+.header > span {
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.header:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.header:hover > span {
+  opacity: 1;
+}
+
+.wrapper {
+  display: flex;
+  gap: 1.5rem;
+  overflow: scroll;
+  border-radius: 5px;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.album {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: none;
+  height: 16rem;
+  width: 12rem;
+  background-position: center;
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.album:hover > .album-title {
+  height: 100%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.album-title {
+  height: 15%;
+  text-align: center;
+  align-content: center;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 5px 5px;
+  transition: all 0.5s;
+}
+
+.album-play-button {
+  height: auto;
+  width: 3em;
+  padding: 5px;
+  transition: all 0.3s;
+}
+
+.album-play-button:hover {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.album-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 0.25rem;
+}
+
+.album-controls > div {
+  flex: 1;
+  border-radius: 5px;
+  padding: 0.5rem;
+  transition: all 0.3s;
+}
+
+.album-controls > div:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.artist-name {
+  font-size: smaller;
+  margin: 10px;
+  opacity: 0.8;
+}
+
+.artist,
+.release {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+
+.artist-image {
+  height: 10em;
+  width: 10em;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.artist-image:hover,
+.release-image:hover {
+  cursor: pointer;
+  filter: grayscale();
+  transform: scale(95%);
+}
+
+.release-image {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.release-title {
+  width: 10rem;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-align: center;
+}
+
+.item-title-text {
+  transition: all 0.3s;
+}
+
+.text-animate {
+  animation: scrollText 5s linear infinite;
+}
+
+.genre-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.genre {
+  min-width: 11.5rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 1rem;
+  transition: all 0.3s;
+}
+
+.genre:hover {
+  cursor: pointer;
+  filter: saturate(200%);
+  transform: scale(95%);
+}
+
+.outer-wrapper {
+  position: relative;
+}
+
+.scroll-btn {
+  height: 50%;
+  width: 2rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  font-size: 2rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+  color: black;
+  background-color: white;
+}
+
+.scroll-btn:hover {
+  scale: 95%;
+}
+
+.scroll-btn:active {
+  scale: 100%;
+}
+
+.scroll-btn > svg {
+  width: 2rem;
+}
+
+.left-btn {
+  left: 0;
+}
+
+.right-btn {
+  right: 0;
+}
+
+.release-scroll-btn {
+  top: 0;
+  transform: translateY(25%);
+}
+
+.artist-scroll-btn {
+  height: 3rem;
+  transform: translateY(-60%);
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

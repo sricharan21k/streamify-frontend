@@ -1,0 +1,165 @@
+<div class="container">
+  <div class="form-container">
+    <div class="header">Streamify</div>
+
+    <form class="wrapper" [formGroup]="registerForm" (ngSubmit)="register()">
+      <!-- Username -->
+      <div>
+        <div class="input-container long-input-container">
+          <input
+            (input)="checkUsername()"
+            class="long-input"
+            type="text"
+            id="username"
+            placeholder=" "
+            formControlName="username"
+          />
+          <label for="username">Username</label>
+        </div>
+      </div>
+
+      <div class="warning">
+        <small
+          *ngIf="
+            registerForm.get('username')?.dirty &&
+            registerForm.get('username')?.hasError('minlength')
+          "
+        >
+          Username must be at least 6 characters long.
+        </small>
+        <small *ngIf="userExists">Username already exists.</small>
+        <small
+          *ngIf="
+            registerForm.get('username')?.dirty &&
+            registerForm.get('username')?.hasError('pattern')
+          "
+        >
+          Username cannot contain special characters or spaces.
+        </small>
+      </div>
+
+      <!-- Firstname & lastname -->
+      <div>
+        <div class="input-container">
+          <input
+            type="text"
+            id="firstname"
+            placeholder=" "
+            formControlName="firstname"
+          />
+          <label for="firstname">Firstname</label>
+        </div>
+        <div class="input-container">
+          <input
+            type="text"
+            id="lastname"
+            placeholder=" "
+            formControlName="lastname"
+          />
+          <label for="lastname">Lastname</label>
+        </div>
+      </div>
+
+      <div class="warning">
+        <small
+          *ngIf="
+            registerForm.get('firstname')?.dirty &&
+            registerForm.get('firstname')?.hasError('pattern')
+          "
+        >
+          Name cannot contain numbers, special characters or spaces.
+        </small>
+      </div>
+      <div class="warning">
+        <small
+          *ngIf="
+            registerForm.get('lastname')?.dirty &&
+            registerForm.get('lastname')?.hasError('pattern')
+          "
+        >
+          Name cannot contain numbers, special characters or spaces.
+        </small>
+      </div>
+
+      <!-- Email -->
+      <div>
+        <div class="input-container long-input-container">
+          <input
+            class="long-input"
+            type="email"
+            id="email"
+            placeholder=" "
+            formControlName="email"
+          />
+          <label for="email">Email</label>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div>
+        <div class="input-container">
+          <input
+            type="password"
+            id="password"
+            placeholder=" "
+            formControlName="password"
+          />
+          <label for="password">Password</label>
+        </div>
+
+        <!-- Confirm password-->
+        <div class="input-container">
+          <input
+            type="password"
+            id="confirm-password"
+            placeholder=" "
+            formControlName="confirmPassword"
+          />
+          <label for="confirmPassword">Confirm password</label>
+        </div>
+      </div>
+
+      <div class="warning">
+        <small
+          *ngIf="
+            registerForm.get('password')?.dirty &&
+            registerForm.get('password')?.hasError('minlength')
+          "
+        >
+          Password must be at least 8 characters long.
+        </small>
+        <small *ngIf="registerForm.get('password')?.errors?.['numberRequired']"
+          >Password must contain at least one number.</small
+        >
+        <small
+          *ngIf="registerForm.get('password')?.errors?.['uppercaseRequired']"
+          >Password must contain at least one uppercase letter.</small
+        >
+        <small
+          *ngIf="registerForm.get('password')?.errors?.['lowercaseRequired']"
+          >Password must contain at least one lowercase letter.</small
+        >
+        <small
+          *ngIf="registerForm.get('password')?.errors?.['specialCharRequired']"
+          >Password must contain at least one special character.</small
+        >
+        <small *ngIf="registerForm.get('password')?.errors?.['noSpacesAllowed']"
+          >Password must not contain spaces.</small
+        >
+        <small
+          *ngIf="
+            registerForm.get('confirmPassword')?.dirty &&
+            registerForm.get('confirmPassword')?.hasError('mismatch')
+          "
+        >
+          Password not matching.
+        </small>
+      </div>
+
+      <div class="links-container">
+        <div class="link-text" routerLink="/login">Existing user?</div>
+      </div>
+      <button class="submit-button" type="submit">Sign up</button>
+    </form>
+  </div>
+</div>

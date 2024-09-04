@@ -1,0 +1,480 @@
+<div class="carousel-container">
+  <div class="carousel">
+    @for (item of items; track $index) {
+    <div
+      class="carousel-item"
+      [ngStyle]="{ width: $index === currentCarouselItemIndex ? '80%' : '5%' }"
+      style="background-image: url(/assets/images/wall.jpg)"
+      (click)="currentCarouselItemIndex = $index"
+    >
+      <div>Hello</div>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- New releases -->
+<div class="container">
+  <div class="header">New releases</div>
+
+  <!-- Movies -->
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 0)">
+    @if (showLeftButtons[0]) {
+    <div class="scroll-btn left-btn" (click)="scrollLeft(0)" @fadeInOut>
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #movieContent>
+      @for (movie of movies; track $index) {
+      <div
+        class="movie-background"
+        [ngStyle]="{
+          'background-image': 'url(' + movie.landscapePoster + ')'
+        }"
+      >
+        <div
+          class="movie-inner-wrapper"
+          [ngClass]="{
+            'movie-info-blur':
+              backgroundBlur && $index === currentBackgroundIndex
+          }"
+        >
+          <div class="movie-info">
+            <div class="movie-title animate">
+              @for (title of movie.title.split(': '); track $index) {
+              <div
+                [ngStyle]="{ 'font-size': $index === 1 ? '1.25rem' : '1.5rem' }"
+              >
+                {{ title }}
+              </div>
+              }
+            </div>
+            <div class="movie-description animate">
+              {{ movie.description }}
+            </div>
+            <div style="color: rgba(255, 255, 255, 0.7)" class="animate">
+              {{ movie?.year }}
+              {{ movie?.runtime ?? 0 | duration }} IMDb
+              {{ movie?.rating }}
+            </div>
+            <div class="genre-container animate">
+              <div class="genre" routerLink="/movies/genre/{{ movie.genre }}">
+                {{ movie.genre }}
+              </div>
+              @if(movie.otherGenres){ @for (genre of
+              movie.otherGenres.split(','); track $index) {
+              <div class="genre-seperator"></div>
+              <div class="genre" routerLink="/movies/genre/{{ genre }}">
+                {{ genre }}
+              </div>
+              } }
+            </div>
+            <div class="play-controls-container">
+              <div
+                class="play-control watch-now-button"
+                (click)="watchNow(movie.id, 'movie')"
+              >
+                Watch now
+              </div>
+              <div
+                class="play-control watchlist-button"
+                (click)="addToWatchlist(movie.id, 'movie')"
+              >
+                Watchlist
+              </div>
+            </div>
+          </div>
+          <div
+            class="movie-empty-area"
+            routerLink="/movie/{{ movie.id }}"
+            (mouseenter)="
+              backgroundBlur = true; currentBackgroundIndex = $index
+            "
+            (mouseleave)="backgroundBlur = false"
+          >
+            <div>
+              <svg
+                class="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.998 7.78C6.729 6.345 9.198 5 12 5c2.802 0 5.27 1.345 7.002 2.78a12.713 12.713 0 0 1 2.096 2.183c.253.344.465.682.618.997.14.286.284.658.284 1.04s-.145.754-.284 1.04a6.6 6.6 0 0 1-.618.997 12.712 12.712 0 0 1-2.096 2.183C17.271 17.655 14.802 19 12 19c-2.802 0-5.27-1.345-7.002-2.78a12.712 12.712 0 0 1-2.096-2.183 6.6 6.6 0 0 1-.618-.997C2.144 12.754 2 12.382 2 12s.145-.754.284-1.04c.153-.315.365-.653.618-.997A12.714 12.714 0 0 1 4.998 7.78ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+      <div class="vertical-header">
+        @for (character of "MOVIES".split(""); track $index) {
+        <div>{{ character }}</div>
+        }
+      </div>
+    </div>
+    @if (showRightButtons[0]) {
+    <div class="scroll-btn right-btn" (click)="scrollRight(0)" @fadeInOut>
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+
+  <!-- Shows -->
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 1)">
+    @if (showLeftButtons[1]) {
+    <div class="scroll-btn left-btn" (click)="scrollLeft(1)" @fadeInOut>
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #showContent>
+      @for (show of movies; track $index) {
+      <div class="show">
+        <img
+          class="show-poster"
+          [src]="show.poster"
+          alt=""
+          routerLink="/show/{{ show.id }}"
+        />
+        <div class="show-details">
+          <div class="animate">
+            <div class="show-title">{{ show.title }}</div>
+            <div class="show-info">
+              {{ show.year }} | {{ show.rating }} IMDb
+            </div>
+          </div>
+          <div class="genre-container animate">
+            <div class="genre" routerLink="/shows/genre/{{ show.genre }}">
+              {{ show.genre }}
+            </div>
+            @if(show.otherGenres){ @for (genre of show.otherGenres.split(',');
+            track $index) {
+            <div class="genre-seperator"></div>
+            <div class="genre" routerLink="/shows/genre/{{ genre }}">
+              {{ genre }}
+            </div>
+            } }
+          </div>
+          <div class="show-description animate">{{ show.description }}</div>
+          <div class="show-play-controls-container">
+            <div
+              class="play-control watch-now-button"
+              (click)="watchNow(show.id, 'show')"
+            >
+              Watch now
+            </div>
+            <div
+              class="play-control watchlist-button"
+              (click)="addToWatchlist(show.id, 'show')"
+            >
+              Watchlist
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+      <div class="vertical-header">
+        @for (character of "SHOWS".split(""); track $index) {
+        <div>{{ character }}</div>
+        }
+      </div>
+    </div>
+    @if (showRightButtons[1]) {
+    <div class="scroll-btn right-btn" (click)="scrollRight(1)" @fadeInOut>
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+
+  <!-- Music -->
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 2)">
+    @if (showLeftButtons[2]) {
+    <div class="scroll-btn left-btn" (click)="scrollLeft(2)" @fadeInOut>
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #musicContent>
+      @for (release of music; track $index) {
+      <div class="release">
+        <img
+          class="release-image"
+          [src]="release.albumCover"
+          alt=""
+          routerLink="/music/album/{{ release.id }}"
+        />
+        <div class="release-details">
+          <div>
+            <div class="release-title">{{ release.title }}</div>
+            <div class="release-artist">{{ release.artistName }}</div>
+          </div>
+          <div class="release-play-controls-container">
+            <div
+              class="release-play-control"
+              (click)="playNow(release.id, 'album')"
+            >
+              <svg
+                class="play-now"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <div
+              class="release-play-control"
+              (click)="addToQueue(release.id, 'album')"
+            >
+              <svg
+                class="play-queue"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 12h14m-7 7V5"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+      <div class="vertical-header">
+        @for (character of "MUSIC".split(""); track $index) {
+        <div>{{ character }}</div>
+        }
+      </div>
+    </div>
+    @if (showRightButtons[2]) {
+    <div class="scroll-btn right-btn" (click)="scrollRight(2)" @fadeInOut>
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- Popular -->
+<div class="container">
+  <div class="header">Most polular</div>
+  <div class="rectangle-wrapper">
+    <div class="square-wrapper">
+      <div class="content-wrapper">
+        <div class="content-header" routerLink="/movies/new-releases">
+          Movies
+        </div>
+        <div class="content">
+          @for (movie of movies; track $index) {
+          <div
+            class="video-content"
+            [ngStyle]="{ 'background-image': 'url(' + movie.poster + ')' }"
+            routerLink="/movie/{{ movie.id }}"
+          ></div>
+          } @for (movie of movies; track $index) {
+          <div
+            class="video-content"
+            [ngStyle]="{ 'background-image': 'url(' + movie.poster + ')' }"
+            routerLink="/movie/{{ movie.id }}"
+          ></div>
+          }
+        </div>
+      </div>
+      <div class="content-wrapper">
+        <div class="content-header" routerLink="/shows/new-releases">Shows</div>
+        <div class="content">
+          @for (movie of movies; track $index) {
+          <div
+            class="video-content"
+            [ngStyle]="{ 'background-image': 'url(' + movie.poster + ')' }"
+            routerLink="/movie/{{ movie.id }}"
+          ></div>
+          } @for (movie of movies; track $index) {
+          <div
+            class="video-content"
+            [ngStyle]="{ 'background-image': 'url(' + movie.poster + ')' }"
+            routerLink="/movie/{{ movie.id }}"
+          ></div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="square-wrapper">
+      <div class="content-wrapper">
+        <div class="content-header">Music</div>
+        <div class="content">
+          @for (album of music; track $index) {
+          <div
+            class="audio-content"
+            [ngStyle]="{ 'background-image': 'url(' + album.albumCover + ')' }"
+            routerLink="/music/album/{{ album.id }}"
+          ></div>
+          } @for (album of music.slice(0,3); track $index) {
+          <div
+            class="audio-content"
+            [ngStyle]="{ 'background-image': 'url(' + album.albumCover + ')' }"
+            routerLink="/music/album/{{ album.id }}"
+          ></div>
+          }
+        </div>
+      </div>
+      <div class="content-wrapper">
+        <div class="content-header">Podcasts</div>
+        <div class="content">
+          @for (album of music; track $index) {
+          <div
+            class="audio-content audio-content-right"
+            [ngStyle]="{ 'background-image': 'url(' + album.albumCover + ')' }"
+            routerLink="/music/album/{{ album.id }}"
+          ></div>
+
+          } @for (album of music.slice(0,3); track $index) {
+          <div
+            class="audio-content audio-content-right"
+            [ngStyle]="{ 'background-image': 'url(' + album.albumCover + ')' }"
+            routerLink="/music/album/{{ album.id }}"
+          ></div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-title">Streamify</div>
+  <div class="footer-title-tag">
+    Made with
+    <svg
+      class="w-6 h-6 text-gray-800 dark:text-white"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z"
+      />
+    </svg>
+    in India
+  </div>
+</div>

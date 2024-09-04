@@ -1,0 +1,155 @@
+@if (showPageContent) {
+<div class="container">
+  @for (genre of genres | keyvalue; track $index;) {
+  <div>
+    <div class="header" routerLink="/movies/genre/{{ genre.key }}">
+      {{ genre.key | pascalcase }} <span>></span>
+    </div>
+    <div class="outer-wrapper" (mousemove)="onMouseMove($event, $index)">
+      @if (showLeftButtons[$index]) {
+      <div class="scroll-btn left-btn" (click)="scrollLeft($index)" @fadeInOut>
+        <svg
+          class="w-6 h-6 text-gray-800 dark:text-white"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m15 19-7-7 7-7"
+          />
+        </svg>
+      </div>
+      }
+      <div class="wrapper" #content>
+        @for (movie of genre.value ; track $index) {
+        <div class="movie">
+          <img
+            class="movie-poster"
+            [src]="movie.poster"
+            alt=""
+            routerLink="/movie/{{ movie.id }}"
+          />
+          <div class="movie-details">
+            <div class="movie-header">
+              <div class="movie-title">{{ movie.title }}</div>
+              <div class="movie-info">
+                {{ movie.year }} | {{ movie.runtime | duration }} |
+                {{ movie.rating }} IMDb
+              </div>
+              <div class="genre-container">
+                <div class="genre" routerLink="/movies/genre/{{ movie.genre }}">
+                  {{ movie.genre }}
+                </div>
+                @if(movie.otherGenres){ @for (item of
+                movie.otherGenres.split(','); track $index) {
+                <div class="genre-seperator"></div>
+                <div class="genre" routerLink="/movies/genre/{{ item }}">
+                  {{ item }}
+                </div>
+                } }
+              </div>
+              <div class="movie-description">{{ movie.description }}</div>
+            </div>
+
+            <div class="play-controls-container">
+              <div
+                class="play-control watch-now-button"
+                (click)="watchNow(movie.id)"
+              >
+                Watch now
+              </div>
+              <div
+                class="play-control watchlist-button"
+                (click)="addToWatchlist(movie.id)"
+              >
+                Watchlist
+              </div>
+            </div>
+          </div>
+        </div>
+        } @for (movie of genre.value ; track $index) {
+        <div class="movie">
+          <img
+            class="movie-poster"
+            [src]="movie.poster"
+            alt=""
+            routerLink="/movie/{{ movie.id }}"
+          />
+          <div class="movie-details">
+            <div class="movie-header">
+              <div class="movie-title">{{ movie.title }}</div>
+              <div class="movie-info">
+                {{ movie.year }} | {{ movie.runtime | duration }} |
+                {{ movie.rating }} IMDb
+              </div>
+              <div class="genre-container">
+                <div class="genre" routerLink="/movies/genre/{{ movie.genre }}">
+                  {{ movie.genre }}
+                </div>
+                @if(movie.otherGenres){ @for (item of
+                movie.otherGenres.split(','); track $index) {
+                <div class="genre-seperator"></div>
+                <div class="genre" routerLink="/movies/genre/{{ item }}">
+                  {{ item }}
+                </div>
+                } }
+              </div>
+              <div class="movie-description">{{ movie.description }}</div>
+            </div>
+
+            <div class="play-controls-container">
+              <div
+                class="play-control watch-now-button"
+                (click)="watchNow(movie.id)"
+              >
+                Watch now
+              </div>
+              <div
+                class="play-control watchlist-button"
+                (click)="addToWatchlist(movie.id)"
+              >
+                Watchlist
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+        <div class="extra-space"></div>
+      </div>
+      @if (showRightButtons[$index]) {
+      <div
+        class="scroll-btn right-btn"
+        (click)="scrollRight($index)"
+        @fadeInOut
+      >
+        <svg
+          class="w-6 h-6 text-gray-800 dark:text-white"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m9 5 7 7-7 7"
+          />
+        </svg>
+      </div>
+      }
+    </div>
+  </div>
+  }
+</div>
+}

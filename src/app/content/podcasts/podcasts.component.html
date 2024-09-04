@@ -1,0 +1,233 @@
+<!-- New releases -->
+<div class="container">
+  <div class="header" routerLink="/podcasts/category/new-releases">
+    New releases <span>></span>
+  </div>
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 0)">
+    @if (showLeftButtons[0]) {
+    <div
+      class="scroll-btn left-btn release-scroll-btn"
+      (click)="scrollLeft(0)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #releaseContent>
+      @for (podcast of topPodcasts; track $index) {
+      <div class="podcast">
+        <div class="inner-wrapper" (click)="playNow(podcast.id)">
+          <img class="podcast-thumbnail" [src]="podcast.thumbnail" alt="" />
+          <div class="podcast-title">
+            {{ podcast.title }}
+          </div>
+        </div>
+        <div class="add-queue-button" (click)="addToQueue(podcast.id)">
+          Add to queue
+        </div>
+      </div>
+      }
+    </div>
+    @if (showRightButtons[0]) {
+    <div
+      class="scroll-btn right-btn release-scroll-btn"
+      (click)="scrollRight(0)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- Trending -->
+<div class="container">
+  <div class="header" routerLink="/podcasts/category/trending">
+    Trending <span>></span>
+  </div>
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 1)">
+    @if (showLeftButtons[1]) {
+    <div
+      class="scroll-btn left-btn release-scroll-btn"
+      (click)="scrollLeft(1)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #trendingContent>
+      @for (podcast of topPodcasts; track $index) {
+      <div class="podcast">
+        <div class="inner-wrapper" (click)="playNow(podcast.id)">
+          <img class="podcast-thumbnail" [src]="podcast.thumbnail" alt="" />
+          <div class="podcast-title">{{ podcast.title }}</div>
+        </div>
+        <div class="add-queue-button" (click)="addToQueue(podcast.id)">
+          Add to queue
+        </div>
+      </div>
+      }
+    </div>
+    @if (showRightButtons[1]) {
+    <div
+      class="scroll-btn right-btn release-scroll-btn"
+      (click)="scrollRight(1)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- Popular -->
+<div class="container">
+  <div class="header" routerLink="/podcasts/category/popular">
+    Popular <span>></span>
+  </div>
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 2)">
+    @if (showLeftButtons[2]) {
+    <div
+      class="scroll-btn left-btn release-scroll-btn"
+      (click)="scrollLeft(2)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #popularContent>
+      @for (podcast of topPodcasts; track $index) {
+      <div class="podcast">
+        <div class="inner-wrapper" (click)="playNow(podcast.id)">
+          <img class="podcast-thumbnail" [src]="podcast.thumbnail" alt="" />
+          <div class="podcast-title">{{ podcast.title }}</div>
+        </div>
+        <div class="add-queue-button" (click)="addToQueue(podcast.id)">
+          Add to queue
+        </div>
+      </div>
+      }
+    </div>
+    @if (showRightButtons[2]) {
+    <div
+      class="scroll-btn right-btn release-scroll-btn"
+      (click)="scrollRight(2)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- All topics -->
+<div class="container">
+  <div class="header">All Topics</div>
+  <div class="topic-wrapper">
+    @for (topic of topicList; track $index) {
+    <div
+      class="topic"
+      [style.background-color]="colors[$index]"
+      routerLink="/podcasts/topic/{{ topic }}"
+    >
+      {{ topic | pascalcase }}
+    </div>
+    }
+  </div>
+</div>

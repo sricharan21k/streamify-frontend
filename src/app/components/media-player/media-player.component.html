@@ -1,0 +1,410 @@
+<!-- Mini player -->
+<div class="mini-player" [ngClass]="{ 'show-mini-player': showMiniPlayer }">
+  <div class="mini-content" [ngSwitch]="contentType" (click)="showMaxPlayer()">
+    @switch (contentType) { @case('audio'){
+    <div class="audio">
+      <div class="mini-thumbnail">
+        <img [src]="currentAudioMedia?.image ?? ''" alt="" />
+      </div>
+      <div class="audio-info">
+        <div class="audio-title">
+          {{ currentAudioMedia?.title ?? "" }}
+        </div>
+        <div class="album-info">
+          {{ currentAudioMedia?.title ?? "" }}
+          @if (true) {
+          <span class="album-info-seperator"></span>
+          <span>Hello</span>
+          }
+        </div>
+      </div>
+    </div>
+    } @case('video'){
+    <div class="video-title">
+      <div
+        class="video-title-text"
+        [ngClass]="{ 'text-animate': textOverflow }"
+        #textElement
+      >
+        {{ currentVideoMedia?.title ?? "" }}
+      </div>
+    </div>
+
+    } }
+  </div>
+
+  <div class="mini-controls">
+    <div class="mini-playback-controls">
+      <svg
+        (click)="previousTrack()"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7 6a1 1 0 0 1 2 0v4l6.4-4.8A1 1 0 0 1 17 6v12a1 1 0 0 1-1.6.8L9 14v4a1 1 0 1 1-2 0V6Z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <div class="play-pause">
+        <svg
+          *ngIf="!isAudioPlaying && !isVideoPlaying"
+          (click)="playPause()"
+          style="height: auto"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <svg
+          *ngIf="isAudioPlaying || isVideoPlaying"
+          (click)="playPause()"
+          style="height: auto"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H8Zm7 0a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
+      <svg
+        (click)="nextTrack()"
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M17 6a1 1 0 1 0-2 0v4L8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8L15 14v4a1 1 0 1 0 2 0V6Z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </div>
+    <div class="mini-progress-container" (mousedown)="onSeekStart($event)">
+      <div
+        class="mini-progress-circle"
+        [style.left.%]="contentType === 'audio' ? audioProgress : videoProgress"
+        (mousedown)="onCircleGrab($event)"
+      ></div>
+      <div
+        class="mini-progress-bar"
+        [style.width.%]="
+          contentType === 'audio' ? audioProgress : videoProgress
+        "
+      ></div>
+    </div>
+    <div class="mini-other-controls">
+      <svg
+        (click)="toggleLoop()"
+        class="size-6"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"
+        />
+      </svg>
+      <svg
+        (click)="toggleShuffle()"
+        class="size-6"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13.484 9.166 15 7h5m0 0-3-3m3 3-3 3M4 17h4l1.577-2.253M4 7h4l7 10h5m0 0-3 3m3-3-3-3"
+        />
+      </svg>
+      <svg
+        (click)="closeMiniPlayer()"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m19 9-7 7-7-7"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- Max player -->
+<div class="max-player" [ngClass]="{ 'max-content': !showMiniPlayer }">
+  <div class="content">
+    <div class="audio-content">
+      <audio #audioElement>
+        <source [src]="currentAudioSrc" />
+      </audio>
+      @if (contentType === 'audio') {
+      <div class="thumbnail">
+        <img [src]="currentAudioMedia?.image ?? ''" alt="" />
+      </div>
+      <div class="metadata">
+        <div style="font-size: 2em">
+          {{ currentAudioMedia?.title ?? "" }}
+        </div>
+      </div>
+      }
+    </div>
+
+    <div
+      class="video-content"
+      [style.width]="videoMedia.length > 1 ? '70%' : '100%'"
+    >
+      <video
+        #videoElement
+        [style.height]="contentType === 'video' ? '460px' : 0"
+      >
+        <source [src]="currentVideoSrc" />
+      </video>
+      @if(contentType === 'video'){
+      <div class="video-title-max">
+        {{ currentVideoMedia?.title ?? "" }}
+      </div>
+      }
+    </div>
+    @if (contentType === 'audio' && audioMedia.length) {
+    <div class="playlist">
+      <div class="playlist-title">Queue</div>
+      <div class="playlist-wrapper">
+        @for (item of audioMedia; track $index) {
+        <div class="playlist-item" (click)="watchNow(item, $index)">
+          <img [src]="item.image" alt="" />
+          <div>{{ item?.title ?? "" }}</div>
+          <div>{{ item.info }}</div>
+        </div>
+        }
+      </div>
+    </div>
+    } @if (contentType === 'video' && videoMedia.length) {
+    <div class="playlist">
+      <div class="playlist-title">Watchlist</div>
+      <div class="playlist-wrapper">
+        @for (item of videoMedia; track $index) {
+        <div class="playlist-item" (click)="watchNow(item, $index)">
+          <img [src]="item.image" alt="" />
+          <div>{{ item?.title ?? "" }}</div>
+          <div>{{ item.info }}</div>
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="controls-wrapper">
+    <div class="progress-container" (click)="onSeekStart($event)">
+      <div
+        class="progress-bar"
+        [style.width.%]="
+          contentType === 'audio' ? audioProgress : videoProgress
+        "
+      ></div>
+      <div
+        class="progress-circle"
+        [style.left.%]="contentType === 'audio' ? audioProgress : videoProgress"
+      ></div>
+    </div>
+    <div class="time-display">
+      <div>
+        {{ contentType === "audio" ? currentAudioTime : currentVideoTime }}
+      </div>
+      <div>{{ contentType === "audio" ? audioDuration : videoDuration }}</div>
+    </div>
+    <div class="controls">
+      <div class="minimize-max-player-button">
+        <svg
+          (click)="closeMaxPlayer()"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m19 9-7 7-7-7"
+          />
+        </svg>
+      </div>
+      <div class="playback-controls">
+        <svg
+          (click)="toggleLoop()"
+          class="size-6"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"
+          />
+        </svg>
+        <div>
+          <svg
+            (click)="previousTrack()"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7 6a1 1 0 0 1 2 0v4l6.4-4.8A1 1 0 0 1 17 6v12a1 1 0 0 1-1.6.8L9 14v4a1 1 0 1 1-2 0V6Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <div class="play-pause">
+            <svg
+              *ngIf="!isAudioPlaying && !isVideoPlaying"
+              (click)="playPause()"
+              style="height: auto"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <svg
+              *ngIf="isAudioPlaying || isVideoPlaying"
+              (click)="playPause()"
+              style="height: auto"
+              class="w-6 h-6 text-gray-800 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H8Zm7 0a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <svg
+            (click)="nextTrack()"
+            class="w-6 h-6 text-gray-800 dark:text-white"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M17 6a1 1 0 1 0-2 0v4L8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8L15 14v4a1 1 0 1 0 2 0V6Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <svg
+          (click)="toggleShuffle()"
+          class="size-6"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13.484 9.166 15 7h5m0 0-3-3m3 3-3 3M4 17h4l1.577-2.253M4 7h4l7 10h5m0 0-3 3m3-3-3-3"
+          />
+        </svg>
+      </div>
+      <div>
+        <svg
+          (click)="toggleFullscreen()"
+          class=""
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 4H4m0 0v4m0-4 5 5m7-5h4m0 0v4m0-4-5 5M8 20H4m0 0v-4m0 4 5-5m7 5h4m0 0v-4m0 4-5-5"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>

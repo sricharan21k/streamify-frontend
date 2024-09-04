@@ -1,0 +1,368 @@
+<!-- Releases -->
+<div class="container">
+  <div class="header" routerLink="/music/albums/new-releases">
+    New Releases <span>></span>
+  </div>
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 0)">
+    @if (showLeftButtons[0]) {
+    <div
+      class="scroll-btn left-btn release-scroll-btn"
+      (click)="scrollLeft(0)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #releaseContent>
+      @for (release of releases; track $index) {
+      <div
+        class="release"
+        (mouseenter)="checkOverflow('releases', $index)"
+        (mouseleave)="resetOverflow()"
+        (click)="playAll('new')"
+      >
+        <img class="release-image" [src]="release.albumCover" alt="" />
+        <div class="release-title">
+          <div
+            class="item-title-text"
+            #releaseTextElements
+            [ngClass]="{
+              'text-animate':
+                overflow.list === 'releases' && overflow.index === $index
+            }"
+          >
+            {{ release.title }}
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    @if (showRightButtons[0]) {
+    <div
+      class="scroll-btn right-btn release-scroll-btn"
+      (click)="scrollRight(0)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- Trending -->
+<div class="container">
+  <div class="header" routerLink="/music/albums/new-releases">
+    Trending <span>></span>
+  </div>
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 1)">
+    @if (showLeftButtons[1]) {
+    <div
+      class="scroll-btn left-btn release-scroll-btn"
+      (click)="scrollLeft(1)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #trendingContent>
+      @for (release of releases; track $index) {
+      <div
+        class="release"
+        (mouseenter)="checkOverflow('trending', $index)"
+        (mouseleave)="resetOverflow()"
+      >
+        <img class="release-image" [src]="release.albumCover" alt="" />
+        <div class="release-title">
+          <div
+            class="item-title-text"
+            #trendingTextElements
+            [ngClass]="{
+              'text-animate':
+                overflow.list === 'trending' && overflow.index === $index
+            }"
+          >
+            {{ release.title }}
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    @if (showRightButtons[1]) {
+    <div
+      class="scroll-btn right-btn release-scroll-btn"
+      (click)="scrollRight(1)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- Artists -->
+<div class="container">
+  <div class="header">Top Artists <span>></span></div>
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 2)">
+    @if (showLeftButtons[2]) {
+    <div
+      class="scroll-btn left-btn artist-scroll-btn"
+      (click)="scrollLeft(2)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #artistContent>
+      @for (artist of artists; track $index) {
+      <div
+        class="artist"
+        (mouseenter)="checkOverflow('artists', $index)"
+        (mouseleave)="resetOverflow()"
+      >
+        <img
+          class="artist-image"
+          [src]="artist.image"
+          alt=""
+          routerLink="/music/artist/{{ artist.id }}/albums"
+        />
+        <div class="artist-title">
+          <div
+            class="item-title-text"
+            #artistTextElements
+            [ngClass]="{
+              'text-animate':
+                overflow.list === 'artists' && overflow.index === $index
+            }"
+          >
+            {{ artist.name }}
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    @if (showRightButtons[2]) {
+    <div
+      class="scroll-btn right-btn artist-scroll-btn"
+      (click)="scrollRight(2)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- Popular albums -->
+<div class="container">
+  <div class="header" routerLink="/music/albums/popular-albums">
+    Top Albums <span>></span>
+  </div>
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 3)">
+    @if (showLeftButtons[3]) {
+    <div class="scroll-btn left-btn" (click)="scrollLeft(3)" @fadeInOut>
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #albumContent>
+      @for (album of topAlbums; track $index) {
+      <div
+        class="album"
+        style="background-image: url('{{ album.albumCover }}')"
+      >
+        <div
+          class="album-title"
+          (mouseenter)="currentTitle = album.title"
+          (mouseleave)="currentTitle = ''"
+        >
+          <div>
+            <div class="item-title-text">
+              {{ album.title }}
+            </div>
+            <div *ngIf="currentTitle === album.title" class="artist-name">
+              {{ album.artistName }}
+            </div>
+          </div>
+          <div *ngIf="currentTitle === album.title" (click)="playNow(album.id)">
+            <svg
+              class="album-play-button"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <div class="album-controls" *ngIf="currentTitle === album.title">
+            <div routerLink="/music/album/{{ album.id }}">View</div>
+            <div (click)="addToQueue(album.id)">+ Queue</div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    @if (showRightButtons[3]) {
+    <div class="scroll-btn right-btn" (click)="scrollRight(3)" @fadeInOut>
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- Genres -->
+<div class="container">
+  <div class="header">Top Genres <span>></span></div>
+  <div class="genre-wrapper">
+    @for (genre of topGenres; track $index;) {
+    <div
+      class="genre"
+      [style.background-color]="genreColor($index)"
+      routerLink="/music/genre/{{ genre }}/albums"
+    >
+      {{ genre }}
+    </div>
+    } @for (genre of topGenres; track $index;) {
+    <div
+      class="genre"
+      [style.background-color]="genreColor($index)"
+      routerLink="/music/genre/{{ genre }}/albums"
+    >
+      {{ genre }}
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,156 @@
+.container {
+  margin-bottom: 3rem;
+}
+
+.header {
+  display: inline-block;
+  font-size: 1.5em;
+  padding: 5px 0;
+  margin-bottom: 1em;
+  transition: all 0.3s;
+}
+
+.header > span {
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.header:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.header:hover > span {
+  opacity: 1;
+}
+
+.wrapper {
+  display: flex;
+  gap: 1.5rem;
+  overflow: scroll;
+}
+
+.topic-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.podcast {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.podcast-thumbnail {
+  height: 10rem;
+  width: 10rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  transition: all 0.3s;
+}
+
+.inner-wrapper {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s;
+}
+
+.inner-wrapper:hover {
+  cursor: pointer;
+  transform: scale(95%);
+  border-radius: 5px;
+}
+
+.podcast-title {
+  padding: 0.5rem 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.add-queue-button {
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: all 0.3s;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.add-queue-button:hover {
+  scale: 95%;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+}
+
+.add-queue-button:active {
+  scale: 100%;
+}
+
+.topic {
+  width: 11.5rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 1rem;
+  transition: all 0.3s;
+}
+
+.topic:hover {
+  cursor: pointer;
+  filter: saturate(200%);
+  transform: scale(95%);
+}
+
+.outer-wrapper {
+  position: relative;
+}
+
+.scroll-btn {
+  height: 50%;
+  width: 2rem;
+  position: absolute;
+  top: 0;
+  transform: translateY(15%);
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  font-size: 2rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+  color: black;
+  background-color: white;
+}
+
+.scroll-btn:hover {
+  scale: 95%;
+}
+
+.scroll-btn:active {
+  scale: 100%;
+}
+
+.scroll-btn > svg {
+  width: 2rem;
+}
+
+.left-btn {
+  left: 0;
+}
+
+.right-btn {
+  right: 0;
+}

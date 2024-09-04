@@ -1,0 +1,409 @@
+<div class="container">
+  <div class="profile">
+    <div class="profile-image-wrapper">
+      @if (userProfile?.image) {
+      <img class="profile-image" [src]="profileImage" alt="" />
+      }@else {
+      <div class="profile-image-alt">
+        {{ userProfile?.firstname?.charAt(0)
+        }}{{ userProfile?.lastname?.charAt(0) }}
+      </div>
+      }
+      <div class="custom-file-upload">
+        <label for="file-upload" class="custom-file-label">
+          Update image
+        </label>
+        <input id="file-upload" type="file" (change)="uploadImage($event)" />
+      </div>
+    </div>
+    <div class="details">
+      <div class="user-name">
+        {{ userProfile?.firstname }} {{ userProfile?.lastname }}
+      </div>
+      <div class="user-id">&#64; {{ userProfile?.username }}</div>
+      <div class="change-password" (click)="changePassword()">
+        Change password
+      </div>
+    </div>
+
+    <div class="logout" (click)="logout()">
+      <div>Logout</div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="logout-btn"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- history -->
+<div class="container">
+  <div class="header">Watch history</div>
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 0)">
+    @if (showLeftButtons[0]) {
+    <div
+      class="scroll-btn left-btn rectangle-scroll-btn"
+      (click)="scrollLeft(0)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #historyContent>
+      @if (historyItems.length) { @for (item of historyItems; track $index) {
+      <div
+        class="list-item"
+        (mouseenter)="checkOverflow('history', $index)"
+        (mouseleave)="resetOverflow()"
+      >
+        <div class="item-wrapper">
+          <img class="rectangle-thumbnail" [src]="item.image" alt="" />
+          <div class="list-item-title">
+            <div
+              class="item-title-text"
+              #historyTextElements
+              [ngClass]="{
+                'text-animate':
+                  overflow.list === 'history' && overflow.index === $index
+              }"
+            >
+              {{ item.title }}
+            </div>
+          </div>
+        </div>
+        <div
+          class="queue-remove-button"
+          (click)="removeItemFromList(item, 'history')"
+        >
+          Remove
+        </div>
+      </div>
+      } }@else {
+      <div class="empty-list">No history</div>
+      }
+    </div>
+    @if (showRightButtons[0]) {
+    <div
+      class="scroll-btn right-btn rectangle-scroll-btn"
+      (click)="scrollRight(0)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- watchlist -->
+<div class="container">
+  <div class="header">Watchlist</div>
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 1)">
+    @if (showLeftButtons[1]) {
+    <div
+      class="scroll-btn left-btn rectangle-scroll-btn"
+      (click)="scrollLeft(1)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #watchlistContent>
+      @if (watchlistItems.length) { @for (item of watchlistItems; track $index)
+      {
+      <div
+        class="list-item"
+        (mouseenter)="checkOverflow('watchlist', $index)"
+        (mouseleave)="resetOverflow()"
+      >
+        <div class="item-wrapper">
+          <img class="rectangle-thumbnail" [src]="item.image" alt="" />
+          <div class="list-item-title">
+            <div
+              class="item-title-text"
+              #watchlistTextElements
+              [ngClass]="{
+                'text-animate':
+                  overflow.list === 'watchlist' && overflow.index === $index
+              }"
+            >
+              {{ item.title }}
+            </div>
+          </div>
+        </div>
+        <div
+          class="queue-remove-button"
+          (click)="removeItemFromList(item, 'watchlist')"
+        >
+          Remove
+        </div>
+      </div>
+      }}@else {
+      <div class="empty-list">Empty</div>
+      }
+    </div>
+    @if (showRightButtons[1]) {
+    <div
+      class="scroll-btn right-btn rectangle-scroll-btn"
+      (click)="scrollRight(1)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- recents -->
+<div class="container">
+  <div class="header">Recently played</div>
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 2)">
+    @if (showLeftButtons[2]) {
+    <div
+      class="scroll-btn left-btn square-scroll-btn"
+      (click)="scrollLeft(2)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #recentContent>
+      @if (recentItems.length) { @for (item of recentItems; track $index) {
+      <div
+        class="list-item"
+        (mouseenter)="checkOverflow('recents', $index)"
+        (mouseleave)="resetOverflow()"
+      >
+        <div class="item-wrapper">
+          <img class="square-thumbnail" [src]="item.image" alt="" />
+          <div class="list-item-title">
+            <div
+              class="item-title-text"
+              #recentsTextElements
+              [ngClass]="{
+                'text-animate':
+                  overflow.list === 'recents' && overflow.index === $index
+              }"
+            >
+              {{ item.title }}
+            </div>
+          </div>
+        </div>
+        <div
+          class="queue-remove-button"
+          (click)="removeItemFromList(item, 'recents')"
+        >
+          Remove
+        </div>
+      </div>
+      }}@else {
+      <div class="empty-list">No recents</div>
+      }
+    </div>
+    @if (showRightButtons[2]) {
+    <div
+      class="scroll-btn right-btn square-scroll-btn"
+      (click)="scrollRight(2)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- queue -->
+<div class="container">
+  <div class="header">Play queue</div>
+  <div class="outer-wrapper" (mousemove)="onMouseMove($event, 3)">
+    @if (showLeftButtons[3]) {
+    <div
+      class="scroll-btn left-btn square-scroll-btn"
+      (click)="scrollLeft(3)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </div>
+    }
+    <div class="wrapper" #queueContent>
+      @if (playQueueItems.length) { @for (item of playQueueItems; track $index)
+      {
+      <div
+        class="list-item"
+        (mouseenter)="checkOverflow('queue', $index)"
+        (mouseleave)="resetOverflow()"
+      >
+        <div class="item-wrapper">
+          <img class="square-thumbnail" [src]="item.image" alt="" />
+          <div class="list-item-title">
+            <div
+              class="item-title-text"
+              #queueTextElements
+              [ngClass]="{
+                'text-animate':
+                  overflow.list === 'queue' && overflow.index === $index
+              }"
+            >
+              {{ item.title }}
+            </div>
+          </div>
+        </div>
+        <div
+          class="queue-remove-button"
+          (click)="removeItemFromList(item, 'queue')"
+        >
+          Remove
+        </div>
+      </div>
+      }}@else {
+      <div class="empty-list">Empty</div>
+      }
+    </div>
+    @if (showRightButtons[3]) {
+    <div
+      class="scroll-btn right-btn square-scroll-btn"
+      (click)="scrollRight(3)"
+      @fadeInOut
+    >
+      <svg
+        class="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </div>
+    }
+  </div>
+</div>

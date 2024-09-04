@@ -1,0 +1,87 @@
+<!-- Selected album -->
+@if (selectedAlbum) {
+<div class="album-container">
+  <div>
+    <div class="album-wrapper">
+      <img class="album-cover" [src]="selectedAlbum.albumCover" alt="" />
+      <div class="album-name">{{ selectedAlbum.title }}</div>
+      <div class="artist-name">{{ selectedAlbum.artistName }}</div>
+    </div>
+  </div>
+  <div class="tracks-container">
+    @for (track of trackList; track $index) {
+    <div class="track">
+      <div>{{ $index + 1 }}</div>
+      <img class="track-cover" [src]="selectedAlbum.albumCover" alt="" />
+      <div>{{ track.title }}</div>
+      @if (track.featuring) {
+      <div>ft. {{ track.featuring }}</div>
+      }
+      <div>{{ track.year }}</div>
+    </div>
+    }
+  </div>
+  <div class="album-info">
+    <div>Album Info</div>
+    <div class="info-item">
+      <div class="info-item-label">Genre</div>
+      <div>{{ selectedAlbum.genre }}</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Year</div>
+      <div>{{ selectedAlbum.year }}</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Tracks</div>
+      <div>{{ selectedAlbum.tracks.length }}</div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- List of albums -->
+@if (albums.length) {
+<div class="container">
+  <div class="header">{{ header | pascalcase }}</div>
+
+  <div class="wrapper">
+    @for (album of albums; track $index) {
+    <div class="album" style="background-image: url('{{ album.albumCover }}')">
+      <div
+        class="album-title"
+        (mouseenter)="currentTitle = album.title"
+        (mouseleave)="currentTitle = ''"
+      >
+        <div>
+          {{ album.title }}
+          <div *ngIf="currentTitle === album.title" class="artist-name-mini">
+            {{ album.artistName }}
+          </div>
+        </div>
+        <div *ngIf="currentTitle === album.title" (click)="playNow(album.id)">
+          <svg
+            class="album-play-button"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <div class="album-controls" *ngIf="currentTitle === album.title">
+          <div routerLink="/music/album/{{ album.id }}">View</div>
+          <div (click)="addToQueue(album.id)">+ Queue</div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+}

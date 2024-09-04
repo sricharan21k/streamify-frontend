@@ -1,0 +1,233 @@
+<!-- Selected movie -->
+@if (selectedMovie) {
+<div class="movie-container">
+  <div
+    class="movie-background"
+    [ngStyle]="{
+      'background-image': 'url(' + selectedMovie.landscapePoster + ')'
+    }"
+  >
+    <div class="movie-info">
+      <div class="movie-title animate">
+        @for (title of selectedMovie.title.split(': '); track $index) {
+        <div [ngStyle]="{ 'font-size': $index === 1 ? '4rem' : '5rem' }">
+          {{ title }}
+        </div>
+        }
+      </div>
+      <div class="animate" style="text-wrap: pretty">
+        {{ selectedMovie.description }}
+      </div>
+      <div style="color: rgba(255, 255, 255, 0.7)" class="animate">
+        {{ selectedMovie.year }}
+        {{ selectedMovie.runtime | duration }} IMDb
+        {{ selectedMovie.rating }}
+      </div>
+      <div class="genre-container animate">
+        <div class="genre" routerLink="/movies/genre/{{ selectedMovie.genre }}">
+          {{ selectedMovie.genre }}
+        </div>
+        @if (selectedMovie.otherGenres) { @for (genre of
+        selectedMovie.otherGenres.split(','); track $index) {
+        <div class="genre-seperator"></div>
+        <div class="genre" routerLink="/movies/genre/{{ genre }}">
+          {{ genre | pascalcase }}
+        </div>
+        } }
+      </div>
+      <div class="play-controls-container">
+        <div
+          class="play-control watch-now-button"
+          (click)="watchNow(selectedMovie.id)"
+        >
+          Watch now
+        </div>
+        <div
+          class="play-control watchlist-button"
+          (click)="addToWatchlist(selectedMovie.id)"
+        >
+          Add to watchlist
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="movie-details">
+    <div class="cast-container">
+      <div class="cast-header">Cast</div>
+      <div class="cast-wrapper">
+        @for (cast of selectedMovie.cast.split(','); track $index) {
+        <div class="cast">
+          <div class="cast-profile">{{ cast.charAt(0) }}</div>
+          <div class="cast-name">{{ cast }}</div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="crew-container">
+      <div class="crew-header">Crew</div>
+      <div class="crew-wrapper">
+        <div class="crew">
+          <div class="crew-department">Director</div>
+          <div class="crew-name" style="font-size: 1.5rem">
+            {{ selectedMovie.director }}
+          </div>
+        </div>
+        <div class="crew">
+          <div class="crew-department">Writer</div>
+          <div class="crew-name">
+            {{ getCrewMember(selectedMovie.crew, "writer") }}
+          </div>
+        </div>
+        <div class="crew">
+          <div class="crew-department">Screenplay</div>
+          <div class="crew-name">{{ selectedMovie.director }}</div>
+        </div>
+        <div class="crew">
+          <div class="crew-department">Producer</div>
+          <div class="crew-name">{{ selectedMovie.producer }}</div>
+        </div>
+        <div class="crew">
+          <div class="crew-department">Composer</div>
+          <div class="crew-name">
+            {{ getCrewMember(selectedMovie.crew, "music") }}
+          </div>
+        </div>
+        <div class="crew">
+          <div class="crew-department">Cinematograper</div>
+          <div class="crew-name">
+            {{ getCrewMember(selectedMovie.crew, "cinematography") }}
+          </div>
+        </div>
+        <div class="crew">
+          <div class="crew-department">Editor</div>
+          <div class="crew-name">
+            {{ getCrewMember(selectedMovie.crew, "editor") }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="add-info-container">
+      <div class="add-info-header">Additional Info</div>
+      <div class="add-info-wrapper">
+        <div class="add-info">
+          <div class="add-info-segment">Production</div>
+          <div>{{ selectedMovie.production }}</div>
+        </div>
+        <div class="add-info">
+          <div class="add-info-segment">Distributed by</div>
+          <div>{{ selectedMovie.distributor }}</div>
+        </div>
+        <div class="add-info">
+          <div class="add-info-segment">Language</div>
+          <div>{{ selectedMovie.language }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- List of movies -->
+@if (movies.length) {
+<div class="container">
+  <div class="header">{{ header | pascalcase }}</div>
+
+  <div class="wrapper">
+    @for (movie of movies ; track $index) {
+    <div class="movie">
+      <img
+        class="movie-poster"
+        [src]="movie.poster"
+        alt=""
+        routerLink="/movie/{{ movie.id }}"
+      />
+      <div class="movie-details-mini">
+        <div class="movie-header">
+          <div class="movie-title">{{ movie.title }}</div>
+          <div class="movie-info-mini">
+            {{ movie.year }} | {{ movie.runtime | duration }} |
+            {{ movie.rating }} IMDb
+          </div>
+          <div class="genre-container">
+            <div class="genre" routerLink="/movies/genre/{{ movie.genre }}">
+              {{ movie.genre }}
+            </div>
+            @if(movie.otherGenres){ @for (item of movie.otherGenres.split(',');
+            track $index) {
+            <div class="genre-seperator"></div>
+            <div class="genre" routerLink="/movies/genre/{{ item }}">
+              {{ item }}
+            </div>
+            } }
+          </div>
+          <div class="movie-description">{{ movie.description }}</div>
+        </div>
+
+        <div class="play-controls-container-mini">
+          <div
+            class="play-control play-control-mini watch-now-button"
+            (click)="watchNow(movie.id)"
+          >
+            Watch now
+          </div>
+          <div
+            class="play-control play-control-mini watchlist-button"
+            (click)="addToWatchlist(movie.id)"
+          >
+            Watchlist
+          </div>
+        </div>
+      </div>
+    </div>
+    } @for (movie of movies ; track $index) {
+    <div class="movie">
+      <img
+        class="movie-poster"
+        [src]="movie.poster"
+        alt=""
+        routerLink="/movie/{{ movie.id }}"
+      />
+      <div class="movie-details-mini">
+        <div class="movie-header">
+          <div class="movie-title">{{ movie.title }}</div>
+          <div class="movie-info-mini">
+            {{ movie.year }} | {{ movie.runtime | duration }} |
+            {{ movie.rating }} IMDb
+          </div>
+          <div class="genre-container">
+            <div class="genre" routerLink="/movies/genre/{{ movie.genre }}">
+              {{ movie.genre }}
+            </div>
+            @if(movie.otherGenres){ @for (item of movie.otherGenres.split(',');
+            track $index) {
+            <div class="genre-seperator"></div>
+            <div class="genre" routerLink="/movies/genre/{{ item }}">
+              {{ item }}
+            </div>
+            } }
+          </div>
+          <div class="movie-description">{{ movie.description }}</div>
+        </div>
+
+        <div class="play-controls-container-mini">
+          <div
+            class="play-control play-control-mini watch-now-button"
+            (click)="watchNow(movie.id)"
+          >
+            Watch now
+          </div>
+          <div
+            class="play-control play-control-mini watchlist-button"
+            (click)="addToWatchlist(movie.id)"
+          >
+            Watchlist
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+}
