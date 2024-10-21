@@ -21,6 +21,7 @@
     "buffer": "^6.0.3",
     "music-metadata-browser": "^2.5.10",
     "rxjs": "~7.8.0",
+    "streamify": "file:",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },

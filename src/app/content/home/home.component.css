@@ -1,45 +1,16 @@
-.carousel-container {
-  position: relative;
-}
-
-.carousel-header {
-  position: absolute;
-  top: 1rem;
-  left: 1.5rem;
-  font-size: 1.5rem;
-  z-index: 1;
-}
-
 .carousel {
   height: 400px;
   margin: 20px 0;
-  position: relative;
-  width: 100%;
   display: flex;
   gap: 15px;
-  overflow: hidden;
-  transition: all 0.3s;
+  transition: var(--trans-3);
 }
 
 .carousel-item {
-  height: 100%;
   width: 10%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: var(--bg-cover);
   border-radius: 10px;
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.carousel-item > input {
-  display: none;
-}
-
-.carousel-item > input:checked + label {
-  width: 80% !important;
+  transition: var(--trans-3);
 }
 
 .container {
@@ -53,7 +24,7 @@
   display: inline-block;
   font-size: 1.5em;
   padding: 5px 0;
-  transition: all 0.3s;
+  transition: var(--trans-3);
 }
 
 .outer-wrapper {
@@ -65,7 +36,6 @@
   gap: 1.5rem;
   overflow: scroll;
   border-radius: 10px;
-  scroll-behavior: smooth;
 }
 
 .wrapper::-webkit-scrollbar {
@@ -96,14 +66,13 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  border: none;
   cursor: pointer;
   z-index: 1;
   font-size: 2rem;
   border-radius: 10px;
   display: flex;
   align-items: center;
-  transition: all 0.3s;
+  transition: var(--trans-3);
 }
 
 .scroll-btn:hover {
@@ -135,21 +104,19 @@
 .movie-background {
   height: 20rem;
   min-width: 45rem;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: var(--bg-cover);
   border-radius: 10px;
 }
 
 .movie-inner-wrapper {
   display: flex;
   height: 100%;
-  transition: all 0.3s;
+  transition: var(--trans-3);
 }
 
 .movie-description {
   width: 85%;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--white-5);
 }
 
 .movie-info {
@@ -170,10 +137,10 @@
 }
 
 .movie-info > div {
-  transition: all 0.5s;
+  transition: var(--trans-5);
 }
 
-.movie-inner-wrapper:hover > .movie-info > .animate {
+.movie-inner-wrapper:hover .animate {
   animation: slideUp 0.5s forwards;
 }
 
@@ -188,10 +155,10 @@
 
 .movie-empty-area > div {
   opacity: 0;
-  transition: all 0.3s;
+  transition: var(--trans-3);
 }
 
-.movie-empty-area > div > svg {
+.movie-empty-area svg {
   height: auto;
   width: 3rem;
 }
@@ -211,13 +178,13 @@
 .genre-seperator {
   font-size: larger;
   padding: 2.5px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--white-5);
   border-radius: 50%;
 }
 
 .genre {
   text-decoration: underline;
-  transition: all 0.3s;
+  transition: var(--trans-3);
 }
 
 .genre:hover {
@@ -237,7 +204,7 @@
   padding: 0.75rem;
   border-radius: 10px;
   text-align: center;
-  transition: all 0.3s;
+  transition: var(--trans-3);
 }
 
 .play-control:hover {
@@ -255,7 +222,7 @@
 }
 
 .watchlist-button {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--white-3);
 }
 
 /* Shows */
@@ -263,15 +230,12 @@
 .show-background {
   height: 20rem;
   min-width: 30rem;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: var(--bg-cover);
   border-radius: 10px;
 }
 
 .show {
   display: flex;
-  flex: none;
 }
 
 .show-title {
@@ -279,18 +243,17 @@
 }
 
 .show-info {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--white-5);
 }
 
-.show:hover > .show-details > .animate {
+.show:hover .animate {
   animation: slideUp 0.5s forwards;
 }
 
 .show-poster {
   height: 18rem;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  transition: all 0.3s;
+  border-radius: 10px 0 10px 0;
+  transition: var(--trans-3);
 }
 
 .show-poster:hover {
@@ -307,13 +270,12 @@
   position: relative;
   font-size: 0.9rem;
   padding: 0.6rem;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0 10px 10px 0;
+  background-color: var(--white-2);
 }
 
 .show-description {
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--white-75);
 }
 
 .show-play-controls-container {
@@ -325,15 +287,14 @@
 
 .release {
   display: flex;
-  transition: all 0.3s;
+  transition: var(--trans-3);
 }
 
 .release-image {
   height: 12rem;
   width: 12rem;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  transition: all 0.3s;
+  border-radius: 10px 0 10px 0;
+  transition: var(--trans-3);
 }
 
 .release-details {
@@ -343,9 +304,8 @@
   justify-content: space-between;
   width: 12rem;
   padding: 1rem 0.75rem;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0 10px 10px 0;
+  background-color: var(--white-2);
 }
 
 .release-title {
@@ -355,12 +315,11 @@
 .release-artist {
   margin: 0.5rem;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--white-75);
 }
 
 .release-image:hover {
   cursor: pointer;
-  /* filter: grayscale(); */
   border-radius: 10px;
   scale: 95%;
 }
@@ -375,14 +334,14 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
-  transition: all 0.3s;
+  background-color: var(--white-2);
+  transition: var(--trans-3);
 }
 
 .release-play-control > svg {
   width: 3rem;
   height: auto;
-  transition: all 0.3s;
+  transition: var(--trans-3);
 }
 
 .play-now {
@@ -396,8 +355,6 @@
 .release-play-control:hover > svg {
   color: rgba(0, 0, 0, 0.9);
 }
-
-/* ======================================================== */
 
 /* Popular */
 
@@ -422,8 +379,8 @@
   padding: 1rem;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.2);
-  transition: all 0.3s;
+  background-color: var(--white-2);
+  transition: var(--trans-3);
 }
 
 .content-header:hover {
@@ -444,9 +401,7 @@
 .video-content {
   width: 25%;
   height: 12rem;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background: var(--bg-cover);
   transition: translate 0.3s, border-radius 0.5s, filter 0.7s, scale 1s;
   z-index: 1;
   filter: grayscale(0);
@@ -493,7 +448,7 @@
   padding-bottom: 2rem;
   flex-direction: column;
   justify-content: flex-end;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--white-5);
 }
 
 .footer-title {
@@ -505,7 +460,7 @@
 }
 
 .footer-title-tag > svg {
-  color: #fa2a55;
+  color: var(--cst-red);
 }
 
 @keyframes slideUp {

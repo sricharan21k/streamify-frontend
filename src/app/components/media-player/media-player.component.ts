@@ -34,8 +34,8 @@ export class MediaPlayerComponent {
   draggingAudio = false;
   draggingVideo = false;
 
-  currentAudioSrc = '/assets/audio/alibaba.mp3';
-  currentVideoSrc = '/assets/video/gvk.mp4';
+  currentAudioSrc = '/assets/audio/ncs 1.m4a';
+  currentVideoSrc = '/assets/video/hd video.mp4';
 
   currentAudioTime = '00:00';
   currentVideoTime = '00:00';
@@ -55,8 +55,8 @@ export class MediaPlayerComponent {
   currentAudioMediaIndex = 0;
   currentVideoMediaIndex = 0;
 
-  audioPlaylist = ['/assets/audio/alibaba.mp3', '/assets/audio/sketchers.mp3'];
-  videoPlaylist = ['/assets/video/gvk.mp4', '/assets/video/gvk.mp4'];
+  audioPlaylist = ['/assets/audio/ncs 1.m4a', '/assets/audio/ncs 2.m4a'];
+  videoPlaylist = ['/assets/video/hd video.mp4', '/assets/video/hd video.mp4'];
 
   thumbnailUrl = 'assets/images/wall.jpg';
   metadata: any = {};

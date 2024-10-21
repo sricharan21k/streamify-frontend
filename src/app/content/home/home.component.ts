@@ -9,7 +9,6 @@ import { PascalcasePipe } from '../../pipes/pascalcase.pipe';
 import { DurationPipe } from '../../pipes/duration.pipe';
 import { UserService } from '../../services/user.service';
 import { Podcast } from '../../model/audio/podcast';
-import { MediaType } from '../../enum/MediaType';
 import { Show } from '../../model/video/show';
 import { Song } from '../../model/audio/song';
 import { MediaService } from '../../services/media.service';

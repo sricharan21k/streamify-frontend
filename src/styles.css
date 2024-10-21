@@ -1,4 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --cst-red: #fa2a55;
+  --white-2: rgba(255, 255, 255, 0.2);
+  --white-3: rgba(255, 255, 255, 0.3);
+  --white-5: rgba(255, 255, 255, 0.5);
+  --white-75: rgba(255, 255, 255, 0.75);
+  --trans-3: all 0.3s;
+  --bg-cover: center / cover no-repeat;
+}
 
 * {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
